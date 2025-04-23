@@ -1,9 +1,5 @@
 package com.example.shop.dto;
 
-import com.example.shop.models.Comment;
-import com.example.shop.models.Task;
-import jakarta.validation.constraints.NotBlank;
-
 import java.time.LocalDateTime;
 
 public class CommentDTO {

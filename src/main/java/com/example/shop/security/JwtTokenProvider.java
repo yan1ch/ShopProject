@@ -19,7 +19,7 @@ public class JwtTokenProvider {
 
     private static final String SECRET = "YourSuperSecretKeyThatIsAtLeast32BytesLong!";
     private final Key JWT_SECRET = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-    private final long JWT_EXPIRATION = 86400000L; // 24 часа
+    private final long JWT_EXPIRATION = 86400000L;
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();
@@ -27,7 +27,7 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("roles", authorities) // Добавляем роли в токен
+                .claim("roles", authorities)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
                 .signWith(JWT_SECRET, SignatureAlgorithm.HS256)

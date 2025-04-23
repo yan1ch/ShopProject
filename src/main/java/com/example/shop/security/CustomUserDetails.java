@@ -18,7 +18,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Возвращаем роль пользователя в виде SimpleGrantedAuthority
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 

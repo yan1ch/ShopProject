@@ -1,8 +1,5 @@
 package com.example.shop.dto;
 
-import com.example.shop.models.Status;
-import jakarta.validation.constraints.NotBlank;
-
 public class StatusDTO {
     private Long id;
     private String name;

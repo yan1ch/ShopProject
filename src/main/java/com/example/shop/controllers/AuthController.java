@@ -33,13 +33,13 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );
 
-        String token = jwtTokenProvider.generateToken(authentication);  // Передаем authentication
+        String token = jwtTokenProvider.generateToken(authentication);
         return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        user = userService.createUser(user);  // Создаём нового пользователя
+        user = userService.createUser(user);
         return ResponseEntity.ok(user);
     }
 

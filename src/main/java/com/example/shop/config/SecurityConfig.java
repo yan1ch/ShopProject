@@ -31,14 +31,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors()  // Включаем CORS
+                .cors()
                 .and()
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()  // Разрешаем доступ к /auth без авторизации
-                        .requestMatchers("/api/statuses/**").hasRole("ADMIN")  // Только для администраторов
-                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")  // Для пользователей и администраторов
-                        .anyRequest().authenticated()  // Все другие запросы требуют авторизации
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/statuses/**").hasRole("ADMIN")
+                        .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // Добавляем фильтр JWT
 
@@ -48,23 +48,23 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Разрешаем запросы только с фронтенда
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Разрешаем методы
-        configuration.setAllowedHeaders(List.of("*"));  // Разрешаем все заголовки
-        configuration.setAllowCredentials(true);  // Разрешаем передачу куки и авторизационных данных
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Применяем ко всем маршрутам
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // Используем BCrypt для хеширования паролей
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();  // Получаем AuthenticationManager
+        return authConfig.getAuthenticationManager();
     }
 }
