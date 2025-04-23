@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -42,7 +43,6 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    // Пример метода для получения текущего пользователя (при необходимости)
     @GetMapping("/current-user")
     public ResponseEntity<String> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
